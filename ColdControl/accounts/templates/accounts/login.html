@@ -1,0 +1,57 @@
+{% extends "./template.html" %}
+{% block content %}
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-md-6 col-lg-4">
+            <div class="card shadow-sm">
+                <div class="card-header bg-primary text-white text-center">
+                    <h2 class="h4 mb-0">Login</h2>
+                </div>
+                <div class="card-body">
+                    <form action="{% url 'accounts:validateUser' %}" method="POST">
+                        {% csrf_token %}
+                        
+                        <!-- Email -->
+                        <div class="form-group mb-4">
+                            <label for="fEmail" class="form-label">Email</label>
+                            <input type="email" id="fEmail" class="form-control" placeholder="Enter your email" name="fEmail" required>
+                        </div>
+
+                        <!-- Password -->
+                        <div class="form-group mb-4">
+                            <label for="fPassword" class="form-label">Password</label>
+                            <input type="password" id="fPassword" class="form-control" placeholder="Enter your password" name="fPassword" required>
+                        </div>
+
+                        <!-- Submit Button -->
+                        <div class="form-group mb-4">
+                            <button type="submit" class="btn btn-primary btn-block" style="margin-left: 150px">Login</button>
+                            <br>
+                                <span>
+                                    Don't have an account? 
+                                    <a href="{% url 'accounts:signUP' %}" style="decoration-text: none">
+                                        Sign up
+                                    </a>
+                                </span>
+                        </div>
+
+
+                    </form>
+
+                    {% if messages %}
+                    <br>
+                        {% for message in messages %}
+                            <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                {{ message }}
+                                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                            </div>
+                        {% endfor %}
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock content %}
+
+
